@@ -46,24 +46,24 @@ download_release() {
 }
 
 get_llvm_triplet_variant() {
-  local version="$1"
-  case "$(uname -s)" in
-    Linux)
-      case "$(uname -m)" in
-        x86_64) echo app-x86_64-unknown-linux-gnu ;;
-        aarch64 | arm64) echo aarch64-unknown-linux-gnu ;;
-        *) fail "$(uname -m) is not supported on linux" ;;
-      esac
-      ;;
-    Darwin)
-      case "$(uname -m)" in
-        x86_64) echo app-x86_64-apple-darwin ;;
-        arm64) echo app-aarch64-apple-darwin ;;
-        *) fail "$(uname -m) is not supported on macos" ;;
-      esac
-      ;;
-    *) fail "$(uname -s) is not supported" ;;
-  esac
+	local version="$1"
+	case "$(uname -s)" in
+	Linux)
+		case "$(uname -m)" in
+		x86_64) echo app-x86_64-unknown-linux-gnu ;;
+		aarch64 | arm64) echo aarch64-unknown-linux-gnu ;;
+		*) fail "$(uname -m) is not supported on linux" ;;
+		esac
+		;;
+	Darwin)
+		case "$(uname -m)" in
+		x86_64) echo app-x86_64-apple-darwin ;;
+		arm64) echo app-aarch64-apple-darwin ;;
+		*) fail "$(uname -m) is not supported on macos" ;;
+		esac
+		;;
+	*) fail "$(uname -s) is not supported" ;;
+	esac
 }
 
 install_version() {
