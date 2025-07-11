@@ -15,7 +15,8 @@
 
 # Dependencies
 
-- `bash`, `curl`, `tar`, and [POSIX utilities](https://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html).
+- `bash`, `curl` and [POSIX utilities](https://pubs.opengroup.org/onlinepubs/9699919799/idx/utilities.html).
+- `unzip`. If you have a Debian system you can install it by typing: `sudo apt-get install unzip`
 
 # Install
 
