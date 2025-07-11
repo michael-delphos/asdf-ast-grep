@@ -25,6 +25,7 @@ sort_versions() {
 
 list_github_tags() {
 	git ls-remote --tags --refs "$GH_REPO" |
+		grep -v 'debug_release' |
 		grep -o 'refs/tags/.*' | cut -d/ -f3- |
 		sed 's/^v//' # NOTE: You might want to adapt this sed to remove non-version strings from tags
 }
