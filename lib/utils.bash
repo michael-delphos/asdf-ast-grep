@@ -38,10 +38,32 @@ download_release() {
 	version="$1"
 	filename="$2"
 
-	url="$GH_REPO/archive/${version}.tar.gz"
+	# https://github.com/ast-grep/ast-grep/releases/download/0.38.7/app-aarch64-apple-darwin.zip
+	url="$GH_REPO/releases/download/${version}/$(get_llvm_triplet_variant "$version").zip"
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
+}
+
+get_llvm_triplet_variant() {
+  local version="$1"
+  case "$(uname -s)" in
+    Linux)
+      case "$(uname -m)" in
+        x86_64) echo app-x86_64-unknown-linux-gnu ;;
+        aarch64 | arm64) echo aarch64-unknown-linux-gnu ;;
+        *) fail "$(uname -m) is not supported on linux" ;;
+      esac
+      ;;
+    Darwin)
+      case "$(uname -m)" in
+        x86_64) echo app-x86_64-apple-darwin ;;
+        arm64) echo app-aarch64-apple-darwin ;;
+        *) fail "$(uname -m) is not supported on macos" ;;
+      esac
+      ;;
+    *) fail "$(uname -s) is not supported" ;;
+  esac
 }
 
 install_version() {
